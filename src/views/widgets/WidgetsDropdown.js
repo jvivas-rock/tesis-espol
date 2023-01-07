@@ -18,7 +18,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="primary"
+          color="dark"
           value={
             <>
               Matematicas
@@ -43,7 +43,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="info"
+          color="dark"
           value={
             <>
              Todos
@@ -68,7 +68,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="warning"
+          color="dark"
           value={
             <>
               Ingeniería Sistemas
@@ -120,7 +120,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="danger"
+          color="dark"
           value={
             <>
               2022-Ciclo II
@@ -147,7 +147,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="success"
+          color="dark"
           value={
             <>
              Materia 2
@@ -174,7 +174,7 @@ const WidgetsDropdown = () => {
       <CCol sm={6} lg={3}>
         <CWidgetStatsA
           className="mb-4"
-          color="secondary"
+          color="dark"
           value={
             <>
               Sección 1
