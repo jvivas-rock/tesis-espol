@@ -29,8 +29,8 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Desarrollado',
-    to: '/desarrollado',
+    name: 'Detallado',
+    to: '/detallado',
     icon: <CIcon icon={cilChartPie} customClassName="nav-icon" />,
   },
   {
