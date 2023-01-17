@@ -10,6 +10,10 @@ import {
   CCol,
   CProgress,
   CRow,
+  CDropdown,
+  CDropdownToggle,
+  CDropdownMenu,
+  CDropdownItem
 
 } from '@coreui/react'
 import { CChartLine } from '@coreui/react-chartjs'
@@ -30,8 +34,18 @@ const Dashboard = () => {
   ]
   return (
     <> 
-      <WidgetsDropdown />
-      <CCard className="mb-4">
+      <CDropdown>
+        <CDropdownToggle href="#" color="secondary">
+          Período
+        </CDropdownToggle>
+        <CDropdownMenu>
+          <CDropdownItem href="#">2022-II</CDropdownItem>
+          <CDropdownItem href="#">2022-I</CDropdownItem>
+          <CDropdownItem href="#">2021-II</CDropdownItem>
+          <CDropdownItem href="#">2021-I</CDropdownItem>
+        </CDropdownMenu>
+      </CDropdown>
+      <CCard className="mb-4 mt-4">
         <CCardBody>
           <CRow>
             <CCol sm={5}>

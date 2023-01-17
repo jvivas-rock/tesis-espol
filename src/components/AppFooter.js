@@ -8,12 +8,12 @@ const AppFooter = () => {
         <a href="https://www.espol.edu.ec/" target="_blank" rel="noopener noreferrer">
           ESPOL
         </a>
-        <span className="ms-1">&copy; 2022 Jonathan Rivas.</span>
+        <span className="ms-1">&copy; 2022 Jonathan Vivas.</span>
       </div>
       <div className="ms-auto">
         <span className="me-1">Powered by</span>
         <a href="https://www.espol.edu.ec/" target="_blank" rel="noopener noreferrer">
-          Developers EC
+          Jonathan Vivas
         </a>
       </div>
     </CFooter>
