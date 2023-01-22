@@ -1,6 +1,7 @@
 export const enviroments = {
-    apiUrl: "https://192.168.253.7:8006/",
+    apiUrl: "http://192.168.253.6:8006",
    services:{
+    frecuencia:"/api/reportes/paralelo-frecuencias/2022/1S/INDG1042/1/0908915234",
     materias: "api/reportes/materias/1/10/%20/",
      paralelomateria: "​/api​/reportes​/paralelos-materia​/{codigo}​/{page}​/{size}",
      profesores: "​/api​/reportes​/profesores​/{page}​/{size}​/{search1}​/{search2}",
