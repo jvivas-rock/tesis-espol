@@ -1,21 +1,22 @@
 import React from 'react'
-import WidgetsDropdown from '../widgets/WidgetsDropdown'
+
 import { CRow, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from '@coreui/react'
 import MUIDataTable from "mui-datatables";
 import ApexCharts from 'apexcharts';
 
-const columns = ["Profesor", "Materia", "Ciclo","Paralelo", "Calificación"];
 
-const data = [
- ["Joe James", "Calculo I", "2022-Cliclo II","2A", "7"],
- ["John Walsh", "Redes II", "2022-Cliclo II","2A", "8"],
- ["Bob Herm", "Fisica Aplicada", "2022-Cliclo II","1B", "4"],
- ["James Houston", "Electrónica", "2022-Cliclo II","1C", "5"],
-];
+ 
+
+const columns = ["Año", "Termino", "Nivel","Materia", "Paralelo", "% Respuestas", "Calificación"];
+
+const data = [ ["2022", "1S", "GRADO","INDG1042", "LOGÍSTICA Y SERVICIO AL CLIENTE","1","93%","96.07",],];
 
 const options = {
   filterType: 'checkbox',
 };
+
+
+
 
 const optionsc = {
   chart: {
@@ -70,20 +71,25 @@ const Dashboard = () => {
       </CDropdownMenu>
     </CDropdown>
     <CRow className="mt-4">
+      <h2>Docente</h2>
       <MUIDataTable
-      title={" Resultados de Evolución"}
+      
+      title={" Historico por Profesor"}
+     
       data={data}
       columns={columns}
       options={options}
       />
       <div id="chart">
-        dfdfgdfg
+      
       </div>
     </CRow>
+   
+    
 
     </>
   )
 }
 
+ 
 export default Dashboard
-
