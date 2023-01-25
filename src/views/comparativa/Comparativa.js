@@ -1,5 +1,7 @@
 import React from 'react'
 
+import * as math from 'mathjs';
+
 import {
 
   CButton,
@@ -25,6 +27,7 @@ import {  cilCloudDownload,} from '@coreui/icons'
 import ReactApexChart from "react-apexcharts";
 
 
+
 import {enviroments} from '../../enviroments/enviroments'
 
 class Comparativa extends React.Component {
@@ -39,34 +42,7 @@ class Comparativa extends React.Component {
         {
           type: 'boxPlot',
           data: [
-            {
-              x: 'Jan 2015',
-              y: [54, 66, 69, 75, 88]
-            },
-            {
-              x: 'Jan 2016',
-              y: [43, 65, 69, 76, 81]
-            },
-            {
-              x: 'Jan 2017',
-              y: [31, 39, 45, 51, 59]
-            },
-            {
-              x: 'Jan 2018',
-              y: [39, 46, 55, 65, 71]
-            },
-            {
-              x: 'Jan 2019',
-              y: [29, 31, 35, 39, 44]
-            },
-            {
-              x: 'Jan 2020',
-              y: [41, 49, 58, 61, 67]
-            },
-            {
-              x: 'Jan 2021',
-              y: [54, 59, 66, 71, 88]
-            }
+            
           ]
         }
       ],
@@ -76,7 +52,7 @@ class Comparativa extends React.Component {
           height: 350
         },
         title: {
-          text: 'Basic BoxPlot Chart',
+          text: 'Paralelo Frecuencia BoxPlot',
           align: 'left'
         },
         plotOptions: {
@@ -107,28 +83,100 @@ class Comparativa extends React.Component {
 
 
 
-  componentDidMount() {
+  getPercentile(data, percentile) {
+    data.sort();
+    var index = (percentile/100) * data.length;
+    var result;
+    if (Math.floor(index) === index) {
+         result = (data[(index-1)] + data[index])/2;
+    }
+    else {
+        result = data[Math.floor(index)];
+    }
+    return result;
+}
 
 
-    let url = enviroments.apiUrl+enviroments.services.frecuencia;
+    crearDatosGrafico(){
 
-    fetch( url)
-    .then(res => {
-      return res.json();
-    }).then(res => {
-      let data = {};
-      res.forEach((registro)=>{
+
+      let url = enviroments.apiUrl+enviroments.services.frecuencia;
+
+      fetch( url)
+      .then(res => {
+        return res.json();
+      }).then(res => {
+        let dataRaw = {};
+        res.forEach((registro)=>{
+        
+          if( typeof dataRaw[registro.idarea] === 'undefined'){
+            dataRaw[registro.idarea]=[];
+          }
+          dataRaw[registro.idarea].push(registro);
+        });
+  
+  
+  
+        let dataChart=[];
+  
+        let keys = Object.keys(dataRaw);
+  
+        keys.forEach((frecuencias) => {
+          let quartilesData  = [];
+  
+          let frecuenciaNombre = "";
+  
+          dataRaw[frecuencias].forEach((registroFrecuencias) => { 
+            quartilesData.push( registroFrecuencias.frecuencia);
+            frecuenciaNombre=registroFrecuencias.area;
+          });
+          
+  
+          let low    = math.min(quartilesData);
+          let q1     = this.getPercentile(quartilesData, 25);
+          let median = this.getPercentile(quartilesData, 50);
+          let q3     = this.getPercentile(quartilesData, 75);
+          let high   = math.max(quartilesData);
+  
+          
+          dataChart.push(  {
+            x: frecuenciaNombre,
+            y: [low,q1,median,q3,high]
+          });
+  
+        });
+        
+        this.setState({ 
+          series: [{
+            type: 'boxPlot',
+            data:dataChart
+        }]
+       });
+
+       setTimeout(()=>{ 
+        
+        let element = document.querySelector(".apexcharts-zoomout-icon");
+        element.click()
+      }, 500);
+       
+  
       
-        if( typeof data[registro.idarea] === 'undefined'){
-          data[registro.idarea]=[];
-        }
-        data[registro.idarea].push(registro);
+
+
       });
 
 
-      console.log(data);
+    }
 
-    });
+  componentDidMount() {
+
+
+    setTimeout(
+      () => this.crearDatosGrafico(),
+      1000
+    );
+
+   
   }
 
   render() {
@@ -176,7 +224,7 @@ class Comparativa extends React.Component {
             
 
             <div id="chart">
-  <ReactApexChart options={this.state.options} series={this.state.series} type="boxPlot" height={350} />
+           <ReactApexChart options={this.state.options} series={this.state.series} type="boxPlot" height={350} />
 </div>
 
 
